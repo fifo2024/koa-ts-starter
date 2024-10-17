@@ -37,7 +37,7 @@ class Other {
         console.log(DateTime.format(new DateTime(), "yyyy-MM-dd hh:mm:ss"));
         const result = this._getBNS();
         console.log(result);
-        ctx.success(result);
+        ctx.body = result;
 
         await next();
     }

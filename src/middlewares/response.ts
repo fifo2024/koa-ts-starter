@@ -2,18 +2,23 @@
  * @file: response.ts
  */
 
-import Koa from 'koa';
-import {ComposedMiddleware} from 'koa-compose';
-import log from '../utils/log';
-import {TStatus, TResponse} from '../types/index';
+import Koa from "koa";
+import { ComposedMiddleware } from "koa-compose";
+import log from "../utils/log";
+import { TStatus, TResponse } from "../types/index";
 
-const SUCCESS_METHOD = 'success';
+const SUCCESS_METHOD = "success";
 const makeRespond = (): Function => {
-    return (ctx: Koa.Context, method: string, status: number,  payload: any): Koa.Context => {
+    return (
+        ctx: Koa.Context,
+        method: string,
+        status: number,
+        payload: any
+    ): Koa.Context => {
         const resBody: TResponse = {
             status: 0,
             message: {},
-            data: payload
+            data: payload,
         };
         ctx.status = status;
         if (payload === undefined) {
@@ -28,7 +33,7 @@ const makeRespond = (): Function => {
         ctx.body = resBody;
         // Output log and record time-consuming
         const timeUsed = Date.now() - ctx.accessTime;
-        log.access({ctx, message: `output:${timeUsed}`});
+        log.access({ ctx, message: `output:${timeUsed}` });
         return ctx;
     };
 };
@@ -41,7 +46,7 @@ const statusCodeMap: TStatus = {
     success: 200,
     badRequest: 200,
     notFound: 404,
-    internalServerError: 500
+    internalServerError: 500,
 };
 
 /**
@@ -72,4 +77,3 @@ const makeRespondMiddleware = (): ComposedMiddleware<Koa.Context> => {
 };
 
 export default makeRespondMiddleware;
-

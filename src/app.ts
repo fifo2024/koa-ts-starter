@@ -6,11 +6,11 @@ import Koa from "koa";
 import bodyParser from "koa-bodyparser";
 import cors from "koa2-cors";
 import enforceHttps from "koa-sslify";
-import jwt from "jsonwebtoken";
+// import jwt from "jsonwebtoken";
 import jwtKoa from "koa-jwt";
 
 import router from "./routes";
-import response from "./middlewares/response";
+// import response from "./middlewares/response";
 import log from "./utils/log";
 
 // Create Koa server
@@ -20,11 +20,11 @@ const app = new Koa();
 const secret = "jwt demo";
 
 // 使用jwtKoa验证
-app.use(
-    jwtKoa({ secret }).unless({
-        path: [/^\/api\/login/], // 数组中的路径不需要通过jwt验证
-    })
-);
+// app.use(
+//     jwtKoa({ secret }).unless({
+//         path: [/^\/api\/login/], // 数组中的路径不需要通过jwt验证
+//     })
+// );
 // app.js
 
 // Koa configuration
@@ -49,7 +49,7 @@ app.use(
 );
 
 // response handler
-app.use(response());
+// app.use(response());
 
 // Router handler
 app.use(router.routes());

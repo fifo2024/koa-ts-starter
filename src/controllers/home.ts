@@ -41,10 +41,10 @@ class Home {
             // wait a moment.
             this.name = String(i);
         }
-        ctx.success({
+        ctx.body = {
             this: this,
             name: this.name,
-        });
+        };
 
         await next();
     }
